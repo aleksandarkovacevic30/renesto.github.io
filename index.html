@@ -77,15 +77,18 @@ $(function() {
     var regex = new RegExp(pattern, flags);
 
     // Determine selected options
-    var options = {};
+    var options = {
+      className: "test"
+    };
     $("input[name='opt[]']").each(function() {
       options[$(this).val()] = $(this).is(":checked");
     });
 
-    // Mark the regex inside the context
-    $(".context").unmark({
+    // Mark the regex inside the contex
+    var object=$(this).parent().parent().parent().parent().prev();
+    object.unmark({
       done: function() {
-        $(".context").markRegExp(regex, options);
+        object.markRegExp(regex, options);
       }
     });
   };
@@ -104,8 +107,8 @@ $(function() {
 </head>
 
 <body>
-  <div class="document">
   <h1>Reguläre Ausdrücke - Eine Schulung für Fachanwender</h1>
+  <div class="document">
 
 <h2>Ziel der Schulung</h2>
 
@@ -160,12 +163,24 @@ DEUTDEFFXXX
 COBADEFFXXX
 </pre>
 </div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="search row">
+      <div class="col-xs-6">
+        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+        <button type="button" name="mark" class="btn btn-primary">Check</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <ol type="a">
   <li>Definiere Teilzeichenkette, die die Commerzbank BICs herausfiltern. </li>
 <li>Welches Zeichen charakterisiert Commerzbank BICs im Beispiel minimal (Achtung: Die Lösung ist nicht eindeutig).</li>
 <li>Der Dezimale Ascii Code 40 stellt die linksoffene Klammer dar und kann mit der Tastenkombination Alt – 40 (Ziffernpad) abgerufen werden. Wie lautet der Ascii Code für das Zeichen „@“ ?</li>
 </ol>
+
+
 
 <h4>Übung 1b: Ziffern</h4>
 
@@ -179,10 +194,23 @@ Your 202
 Your MT202Cov
 </pre>
 </div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="search row">
+      <div class="col-xs-6">
+        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+        <button type="button" name="mark" class="btn btn-primary">Check</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <ol type="a">
   <li>Definiere Teilzeichenkette, die nur aus Ziffern besteht und nur Text anzeigt, der sich auf den Nachrichtentyp MT103 bezieht.</li>
   <li>Ist es möglich nur mit Ziffern alle Texte zu finden, die sich auf MT202xxx Transaktionen beziehen?</li>
 </ol>
+
+
 
 <h4>Übung 1c: Sonderzeichen</h4>
 <div class="content">
@@ -195,6 +223,16 @@ Betrachte folgende Beispiele:
 123.24 USD
 MT103
 </pre>
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="search row">
+      <div class="col-xs-6">
+        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+        <button type="button" name="mark" class="btn btn-primary">Check</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="content">
@@ -240,6 +278,16 @@ EE342200221034126658
 8051465
 78988798654
 </pre>
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="search row">
+      <div class="col-xs-6">
+        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+        <button type="button" name="mark" class="btn btn-primary">Check</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="content">
@@ -315,6 +363,17 @@ EE342200221034126658
 78 9887986 54
 </pre>
 </div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="search row">
+      <div class="col-xs-6">
+        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+        <button type="button" name="mark" class="btn btn-primary">Check</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="content">
 <ol type="a">
 <li>Erkenne die deutschen IBANs mit einem regulären Ausdruck, der die verschiedenen obigen Schreibweisen umfasst (Tip: Verwende \d und \s)</li>
@@ -340,6 +399,17 @@ error Accessing Customer Data unsuccesfull!
 success Operation Completed.
 </pre>
 </div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="search row">
+      <div class="col-xs-6">
+        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+        <button type="button" name="mark" class="btn btn-primary">Check</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="content">
 Wenn wir nun die erfolgreichen Durchführungen filtern wollen, so würde die Suche nach dem Wort success sowohl den ersten als auch den zweiten Text treffen. Die Suche nach ^success wäre allerdings dann wieder eindeutig.
 </div>
@@ -382,6 +452,16 @@ HANYUS33XXX
 KEYBUS33FEX 
 </pre>
 </div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="search row">
+      <div class="col-xs-6">
+        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+        <button type="button" name="mark" class="btn btn-primary">Check</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="content">
   <ol type="a">
@@ -405,14 +485,15 @@ Es ist weiterhin möglich diese Ausdrücke zu referenzieren. Im Beispiel oben^\1
 
 =====================
 
+<!--
 <div class="panel panel-default">
   <div class="panel-heading">Search</div>
   <div class="panel-body">
     <div class="search row">
       <div class="col-xs-6">
         <span>Type in a regular expression:</span>
-        <input type="text" name="regex" class="form-control input-sm" placeholder="/Lor[^]?m/gmi">
-        <button type="button" name="mark" class="btn btn-primary">Mark</button>
+        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+        <button type="button" name="mark" class="btn btn-primary">Check</button>
       </div>
     </div>
   </div>
@@ -421,16 +502,18 @@ Es ist weiterhin möglich diese Ausdrücke zu referenzieren. Im Beispiel oben^\1
 
 <div class="panel panel-default">
   <div class="panel-body context">
-    <p>
+    <pre>
       Lorem ipsum dolor sit āmet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, nò sea takimata
       sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
       rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
       At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie çonsequat, vel illum dolore
       eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit prāesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
-    </p>
+    </pre>
 
   </div>
 </div>
+-->
+
 </div>
 </body>
 
