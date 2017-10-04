@@ -255,14 +255,14 @@ MT103
 In dieser Lektion betrachten wir das einschließen oder ausschließen eines einzelnen Zeichens bei der Suche in einem Text.
 Die Syntax hierfür ist nicht besonders schwer:
 <ol>
-  <li>[abc] bezeichnet ein Zeichen, das a, b oder c ist</li>
-<li>[^abc] bezeichnet ein Zeichen, das nicht a, b oder c ist.</li>
+  <li><code>[abc]</code> bezeichnet ein Zeichen, das a, b oder c ist</li>
+<li><code>[^abc]</code> bezeichnet ein Zeichen, das nicht a, b oder c ist.</li>
 </ol>
 Mit diesem Baustein kann man nun differenziert Texte auswählen, wie wir in der nachfolgenden Übung sehen werden. 
 Manchmal ist es sinnvoll ganze Bereiche zu Kennzeichnen:
 <ol>
-  <li>[a-z] bezeichnet ein Zeichen „zwischen“ a und z</li>
-  <li>[0-9] bezeichnet eine Zahl „zwischen“ 0 und 9.</li>
+  <li><code>[a-z]</code> bezeichnet ein Zeichen „zwischen“ a und z</li>
+  <li><code>[0-9]</code> bezeichnet eine Zahl „zwischen“ 0 und 9.</li>
 </ol>
 
 Dies wollen wir in nachfolgender Übung vertiefen.
@@ -313,27 +313,27 @@ EE342200221034126658
 <div class="content">
 Mittlerweile wissen wir schon, wie man durch Wiederholung (DE) Ausdrücke erkennen kann. Da man nicht alles Tippen will gibt es Wiederholungsfaktoren:
 <ol>
-<li>{n}  muss n-mal vorkommen</li>
-<li>{min,} muss mindestens min mal vorkommen</li>
-<li>{0,max} darf höchstens max mal vorkommen</li>
-<li>{min,max} kommt mindestens min mal und höchstens max mal vor</li>
+<li><code>{n}</code>  muss n-mal vorkommen</li>
+<li><code>{min,}</code> muss mindestens min mal vorkommen</li>
+<li><code>{0,max}</code> darf höchstens max mal vorkommen</li>
+<li><code>{min,max}</code> kommt mindestens min mal und höchstens max mal vor</li>
 </ol>
 
 Einige Fälle werden mit eigenen Symbolen versehen (?, * oder +):
 
 <ol>
-<li>{0,} oder * kommt beliebig oft vor</li>
-<li>{1,} oder + kommt mindestens einmal vor</li>
-<li>{0,1}  oder ? ist optional, kommt 1 mal oder gar nicht vor.</li>
+<li><code>{0,}</code> oder * kommt beliebig oft vor</li>
+<li><code>{1,}</code> oder + kommt mindestens einmal vor</li>
+<li><code>{0,1}</code>  oder ? ist optional, kommt 1 mal oder gar nicht vor.</li>
 </ol>
 
-Z.B. Ergibt [a]+ Treffer die Zeichenfolgen: a oder aa oder aaa , usw.</br>
-Achtung: a*  trifft immer irgendwas, denn jede Zeichenfolge enthält 0 mal das Zeichen a.</br>
+Z.B. Ergibt <code>[a]+</code> Treffer die Zeichenfolgen: a oder aa oder aaa , usw.</br>
+Achtung: <code>a*</code>  trifft immer irgendwas, denn jede Zeichenfolge enthält 0 mal das Zeichen a.</br>
 
 Diese Wiederholungsfaktoren sind gierig (greedy), dass heißt, sie versuchen möglichst treffen. Dies kann man sehr schön an einem Beispiel sehen:</br>
-Beispiel: Schauen wir uns den Text ABCDEB an. Dann trifft der reguläre Ausdruck A.*B nicht nur AB sondern findet ABCDEB.</br>
+Beispiel: Schauen wir uns den Text ABCDEB an. Dann trifft der reguläre Ausdruck <code>A.*B</code> nicht nur AB sondern findet ABCDEB.</br>
 Tatsächlich kann man diese Suche auch lazy schalten. Dies wird durch ein nachgestelltes Fragezeichen erreicht.</br>
-Beispiel: Schauen wir uns den Text ABCDEB an. Dann trifft der reguläre Ausdruck A.*?B tatsächlich AB.</br>
+Beispiel: Schauen wir uns den Text ABCDEB an. Dann trifft der reguläre Ausdruck <code>A.*?B</code> tatsächlich <code>AB.</code></br>
 In den nachfolgenden Übungen versuchen wir nun das Verständnis für Wiederholungsfaktoren zu schärfen.</br>
 </div>
 
@@ -349,10 +349,10 @@ Wir verwenden wieder das Beispiel aus Übung 4.5.
 
 <h3>Lektion 4: Leerzeichen und andere Hürden</h3>
 <div class="content">
-Als Ergänzung zu obigen Lektionen sei hier noch erwähnt, dass mit \d eine Ziffer bezeichnet wird und mit \D eine Nicht – Ziffer. Analog bezeichnet \w ein alphanumerisches (Ziffern und Zeichen!) und \W ein nicht alphanumerisches Zeichen.</br>
-Oftmals benötigt man das mit \s bezeichnete Leerzeichen (whitespace charakter) und als Gegenstück  \S das Nicht – Leerzeichen.</br>
+Als Ergänzung zu obigen Lektionen sei hier noch erwähnt, dass mit <code>\d</code> eine Ziffer bezeichnet wird und mit <code>\D</code> eine Nicht – Ziffer. Analog bezeichnet <code>\w</code> ein alphanumerisches (Ziffern und Zeichen!) und <code>\W</code> ein nicht alphanumerisches Zeichen.</br>
+Oftmals benötigt man das mit <code>\s</code> bezeichnete Leerzeichen (whitespace charakter) und als Gegenstück <code>\S</code> das Nicht – Leerzeichen.</br>
 Anwendungsmöglichkeiten werden wir in der nachfolgenden Übung aufzeigen.</br>
-Eine fortgeschrittene Ergänzung hierzu ist das Erkennen von Tabulatoren (\t) Zeilenumbrüchen (\r).</br>
+Eine fortgeschrittene Ergänzung hierzu ist das Erkennen von Tabulatoren (<code>\t</code>) Zeilenumbrüchen (<code>\r</code>).</br>
 </div>
 <h3>Übung 4: Leerzeichen und andere Hürden</h3>
 <div class="content">
@@ -395,12 +395,12 @@ EE342200221034126658
 <div class="content">
 Bislang haben wir zumeist nach Vorkommen irgendwo im String geschaut. Um jedoch das zu treffen, was man will, ist es oftmals erforderlich, den regulären Ausdruck möglichst genau auf den Suchbegriff zu fokussieren. Hierbei sind die sogenannten Begrenzer:
 <ol>
-<li>Anfangsmarke : ˆ (Hut) und</li>
-<li>Endmarke   : $ (Dollar Zeichen)</li>
+<li>Anfangsmarke : <code>ˆ</code> (Hut) und</li>
+<li>Endmarke   : <code>$</code> (Dollar Zeichen)</li>
 </ol>
 hilfreich.</br>
 
-Hierbei ist zu beachten, dass diese Zeichen kontextsensitiv („von der Umgebung abhängend“) sind. Vgl. hierzu die Bedeutung von [^abc].
+Hierbei ist zu beachten, dass diese Zeichen kontextsensitiv („von der Umgebung abhängend“) sind. Vgl. hierzu die Bedeutung von <code>[^abc]</code>.
 Um dies etwas klarer zu machen, geben wir folgendes Beispiel aus einem Logfile:
 </div>
 <div>
@@ -422,7 +422,7 @@ success Operation Completed.
 </div>
 </div>
 <div class="content">
-Wenn wir nun die erfolgreichen Durchführungen filtern wollen, so würde die Suche nach dem Wort success sowohl den ersten als auch den zweiten Text treffen. Die Suche nach ^success wäre allerdings dann wieder eindeutig.
+Wenn wir nun die erfolgreichen Durchführungen filtern wollen, so würde die Suche nach dem Wort success sowohl den ersten als auch den zweiten Text treffen. Die Suche nach <code>^success</code> wäre allerdings dann wieder eindeutig.
 </div>
 
 <h3>Übung 5: Der Beginn und der Anfang</h3>
@@ -489,13 +489,18 @@ KEYBUS33FEX
 Sogenannte Gruppierungen ermöglichen es insbesondere, Teildaten für eine weitere Verarbeitung auszuschneiden. Diese Gruppen werden durch Klammern gebildet. </br>
 Das folgende Beispiel zeigt die Möglichkeiten für eine BIC6. Nehmen wir die BIC6 COBADE. Diese können wir mit dem regulären Ausdruck ^(.{4})(.{2})$ in zwei Gruppen zerlegt werden die erste enthält dann COBA und die zweite Gruppe enthält DE.</br>
 </br>
-Diese Gruppen können auch verschachtelt auftreten (Klammer in Klammer). Im Beispiel ergibt der beispielhafte Ausdruck ^(.{4}(.{2}))$ als „äußere Gruppe“ COBADE und als „innere Gruppe“ DE.</br>
-Eine Erweiterung ergibt sich, wenn man bedingte Gruppierung zulässt. Bedingungen werden in Klammern durch das „pipe“ Symbol dargestellt. Im vorhergehenden Beispiel könnte man mit ^(.{4}(DE|IT))$ zwar im gegebenen Einzelfall das vorhergehende Ergebnis erzeugen würde aber z.B. CITIUS ignorieren.</br>
-Es ist weiterhin möglich diese Ausdrücke zu referenzieren. Im Beispiel oben^\1(.{4})\1(.{2})$. Mit diesem Instrument können wir Ersetzen – Operationen durchführen. Dies ist allerdings Sprachabhängig.
+Diese Gruppen können auch verschachtelt auftreten (Klammer in Klammer). Im Beispiel ergibt der beispielhafte Ausdruck <code>^(.{4}(.{2}))$</code> als „äußere Gruppe“ COBADE und als „innere Gruppe“ DE.</br>
+Eine Erweiterung ergibt sich, wenn man bedingte Gruppierung zulässt. Bedingungen werden in Klammern durch das „pipe“ Symbol dargestellt. </br>
+Im vorhergehenden Beispiel könnte man mit 
+<code>^(.{4}(DE|IT))$</code>
+ zwar im gegebenen Einzelfall das vorhergehende Ergebnis erzeugen würde aber z.B. CITIUS ignorieren.</br>
+Es ist weiterhin möglich diese Ausdrücke zu referenzieren. Im Beispiel oben
+<code>^\1(.{4})\1(.{2})$
+</code>. 
+Mit diesem Instrument können wir Ersetzen – Operationen durchführen. Dies ist allerdings Sprachabhängig.
 </div>
 
 
-=====================
 
 <!--
 <div class="panel panel-default">
