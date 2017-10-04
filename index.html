@@ -64,8 +64,9 @@ $(function() {
   var mark = function() {
 
     // Read input
-    var inputstring = $("input[name='regex']").val();
+    var inputstring = $(this).prev().val();
     if (inputstring.trim() === "") {
+      console.log("input string empty");
       return;
     }
 
@@ -76,13 +77,9 @@ $(function() {
 
     var regex = new RegExp(pattern, flags);
 
-    // Determine selected options
     var options = {
       className: "test"
     };
-    $("input[name='opt[]']").each(function() {
-      options[$(this).val()] = $(this).is(":checked");
-    });
 
     // Mark the regex inside the contex
     var object=$(this).parent().parent().parent().parent().prev();
@@ -92,10 +89,17 @@ $(function() {
       }
     });
   };
+  var unmark = function() {
 
+    // Mark the regex inside the contex
+    $(this).parent().parent().parent().parent().prev().unmark();
+    
+  };
 
   // Trigger mark action on button click
   $("button[name='mark']").on("click", mark);
+  // Trigger mark action on button click
+  $("button[name='clear']").on("click", unmark);
 
 });
 
@@ -156,6 +160,7 @@ Für die Übung stellen wir uns nun einen „Automaten“ vor, der für gegebene
 
 <h4> Übung 1a: Zeichen</h4>
 Im Beispiel sind folgende Zeichenketten (hier BICs) gegeben:
+<div>
 <div class="test">
 <pre>
 COBADEFFXXX
@@ -168,12 +173,12 @@ COBADEFFXXX
     <div class="search row">
       <div class="col-xs-6">
         <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button>
+        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
       </div>
     </div>
   </div>
 </div>
-
+</div>
 <ol type="a">
   <li>Definiere Teilzeichenkette, die die Commerzbank BICs herausfiltern. </li>
 <li>Welches Zeichen charakterisiert Commerzbank BICs im Beispiel minimal (Achtung: Die Lösung ist nicht eindeutig).</li>
@@ -185,6 +190,7 @@ COBADEFFXXX
 <h4>Übung 1b: Ziffern</h4>
 
 In einem Kommentarfeld werden Nachrichtentypen wie
+<div>
 <div class="test">
   <pre>
 103 from 12.03.2016
@@ -199,12 +205,12 @@ Your MT202Cov
     <div class="search row">
       <div class="col-xs-6">
         <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button>
+        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
       </div>
     </div>
   </div>
 </div>
-
+</div>
 <ol type="a">
   <li>Definiere Teilzeichenkette, die nur aus Ziffern besteht und nur Text anzeigt, der sich auf den Nachrichtentyp MT103 bezieht.</li>
   <li>Ist es möglich nur mit Ziffern alle Texte zu finden, die sich auf MT202xxx Transaktionen beziehen?</li>
@@ -217,6 +223,7 @@ Your MT202Cov
 Sonderzeichen sind ein spezielles Thema. So bezeichnet der Punkt „.“ etwa eine Joker (wildcard) für ein beliebiges Zeichen (warum so etwas überhaupt Sinn macht erklären wir später). Für ein Sonderzeichen (also z.B. den Punkt) benötigt man eine spezielle Kennzeichnung, man muss dem Automat sagen dass jetzt das Zeichen Punkt kommt und nicht der wildcard. Dazu verwendet man den backslash: „ \.“. 
 Betrachte folgende Beispiele:
 </div>
+<div>
 <div class="test">
   <pre>
 123.00 EUR
@@ -229,12 +236,12 @@ MT103
     <div class="search row">
       <div class="col-xs-6">
         <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button>
+        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
       </div>
     </div>
   </div>
 </div>
-
+</div>
 <div class="content">
   <ol type="a">
     <li>Finde über ein Sonderzeichen alle Textketten, die wie ein Betrag aussehen.</li>
@@ -265,6 +272,8 @@ Dies wollen wir in nachfolgender Übung vertiefen.
 <div class="content">
 In dieser Übung betrachten wir die folgende Sammlung von IBANs und Kontonummern:
 </div>
+
+<div>
 <div class="test">
 <pre>
 DE27100777770209299700 
@@ -284,12 +293,12 @@ EE342200221034126658
     <div class="search row">
       <div class="col-xs-6">
         <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button>
+        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
       </div>
     </div>
   </div>
 </div>
-
+</div>
 <div class="content">
   <ol type="a">
 <li>Finde alle IBANs, die mit D beginnen (Tipp:verwende hierfür die [ ] - Syntax).</li>
@@ -349,6 +358,7 @@ Eine fortgeschrittene Ergänzung hierzu ist das Erkennen von Tabulatoren (\t) Ze
 <div class="content">
 Betrachte den folgenden Beispielsatz:
 </div>
+<div>
 <div class="test">
   <pre>
 DE27 1007 7777 0209 2997 00 
@@ -368,12 +378,12 @@ EE342200221034126658
     <div class="search row">
       <div class="col-xs-6">
         <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button>
+        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
       </div>
     </div>
   </div>
 </div>
-
+</div>
 <div class="content">
 <ol type="a">
 <li>Erkenne die deutschen IBANs mit einem regulären Ausdruck, der die verschiedenen obigen Schreibweisen umfasst (Tip: Verwende \d und \s)</li>
@@ -393,6 +403,7 @@ hilfreich.</br>
 Hierbei ist zu beachten, dass diese Zeichen kontextsensitiv („von der Umgebung abhängend“) sind. Vgl. hierzu die Bedeutung von [^abc].
 Um dies etwas klarer zu machen, geben wir folgendes Beispiel aus einem Logfile:
 </div>
+<div>
 <div class="test">
 <pre>
 error Accessing Customer Data unsuccesfull!
@@ -404,12 +415,12 @@ success Operation Completed.
     <div class="search row">
       <div class="col-xs-6">
         <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button>
+        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
       </div>
     </div>
   </div>
 </div>
-
+</div>
 <div class="content">
 Wenn wir nun die erfolgreichen Durchführungen filtern wollen, so würde die Suche nach dem Wort success sowohl den ersten als auch den zweiten Text treffen. Die Suche nach ^success wäre allerdings dann wieder eindeutig.
 </div>
@@ -418,6 +429,7 @@ Wenn wir nun die erfolgreichen Durchführungen filtern wollen, so würde die Suc
 <div class="content">
 Betrachte folgende BIC – Liste:
 </div>
+<div>
 <div class="test">
   <pre>
 AUSKDEFFXXX
@@ -457,12 +469,12 @@ KEYBUS33FEX
     <div class="search row">
       <div class="col-xs-6">
         <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button>
+        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
       </div>
     </div>
   </div>
 </div>
-
+</div>
 <div class="content">
   <ol type="a">
 <li>Finde alle BICs, die am Anfang einer Zeile stehen und sich auf ein US – Institut beziehen, also an der Stelle 5 und 6 US enthalten.</li>
@@ -493,7 +505,7 @@ Es ist weiterhin möglich diese Ausdrücke zu referenzieren. Im Beispiel oben^\1
       <div class="col-xs-6">
         <span>Type in a regular expression:</span>
         <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button>
+        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
       </div>
     </div>
   </div>
