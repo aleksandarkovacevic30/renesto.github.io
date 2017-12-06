@@ -23,6 +23,14 @@ $(function() {
     $(".context").unmark({
       done: function() {
         $(".context").markRegExp(regex, options);
+        var curResult=$('mark.test').map(function(){return this.innerHTML;}).get().join(',');
+        var expResult=$(".context")
+          if (result === "COBADEFF,COBADEFF") {
+            $('#currentResult').text("Ergebnis ist richtig selektiert");
+          } else {
+            $('#currentResult').text("Ergebnis ist falsch selektiert");
+          }
+
       }
     });
   };

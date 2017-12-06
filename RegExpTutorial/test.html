@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+
+    <!--    <link rel="stylesheet" type="text/css" href="/css/result-light.css">-->
+    <script type="text/javascript" src="jquery-latest.min.js"></script>
+    <script type="text/javascript" src="bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <script type="text/javascript" src="jquery.mark.min.js"></script>
+    <script type="text/javascript" src="reveal.js"></script>
+    <link rel="stylesheet" type="text/css" href="reveal.css">
+    <link rel="stylesheet" type="text/css" href="white.css">
+    <style type="text/css">
+        h1 {
+            counter-reset: h2counter;
+        }
+        h2:before {
+            content: counter(h2counter) ".\0000a0\0000a0";
+            counter-increment: h2counter;
+            counter-reset: h3counter;
+        }
+        h3:before {
+            content: counter(h2counter) "." counter(h3counter) ".\0000a0\0000a0";
+            counter-increment: h3counter;
+        }
+        body {
+            margin: 15px;
+            counter-reset: h2counter;
+        }
+        div.search span,
+        div.search input[name="regex"] {
+            display: block;
+        }
+        div.search input[name="regex"],
+        button {
+            margin-top: 4px;
+        }
+        div.panel {
+            margin-bottom: 15px;
+        }
+        div.panel .panel-body p:last-child {
+            margin-bottom: 0;
+        }
+        mark {
+            padding: 0;
+        }
+    </style>
+
+    <title>Reguläre Ausdrücke - Eine Schulung für Fachanwender</title>
+
+
+    <script type='text/javascript'>
+        //<![CDATA[
+        window.onload = function() {
+                    Reveal.initialize({
+
+            // Display presentation control arrows
+            controls: false,
+
+            // Help the user learn the controls by providing hints, for example by
+            // bouncing the down arrow when they first encounter a vertical slide
+            controlsTutorial:false,
+
+            // Determines where controls appear, "edges" or "bottom-right"
+            controlsLayout: 'bottom-right',
+
+            // Visibility rule for backwards navigation arrows; "faded", "hidden"
+            // or "visible"
+            controlsBackArrows: 'faded',
+
+            // Display a presentation progress bar
+            progress: true,
+
+            // Set default timing of 2 minutes per slide
+            defaultTiming: 0,
+
+            // Display the page number of the current slide
+            slideNumber: false,
+
+            // Push each slide change to the browser history
+            history: false,
+
+            // Enable keyboard shortcuts for navigation
+            keyboard: true,
+
+            // Enable the slide overview mode
+            overview: true,
+
+            // Vertical centering of slides
+            center: true,
+
+            // Enables touch navigation on devices with touch input
+            touch: true,
+
+            // Loop the presentation
+            loop: false,
+
+            // Change the presentation direction to be RTL
+            rtl: false,
+
+            // Randomizes the order of slides each time the presentation loads
+            shuffle: false,
+
+            // Turns fragments on and off globally
+            fragments: true,
+
+            // Flags if the presentation is running in an embedded mode,
+            // i.e. contained within a limited portion of the screen
+            embedded: false,
+
+            // Flags if we should show a help overlay when the questionmark
+            // key is pressed
+            help: true,
+
+            // Flags if speaker notes should be visible to all viewers
+            showNotes: false,
+
+            // Global override for autoplaying embedded media (video/audio/iframe)
+            // - null: Media will only autoplay if data-autoplay is present
+            // - true: All media will autoplay, regardless of individual setting
+            // - false: No media will autoplay, regardless of individual setting
+            autoPlayMedia: null,
+
+            // Number of milliseconds between automatically proceeding to the
+            // next slide, disabled when set to 0, this value can be overwritten
+            // by using a data-autoslide attribute on your slides
+            autoSlide: 0,
+
+            // Stop auto-sliding after user input
+            autoSlideStoppable: true,
+
+            // Use this method for navigation when auto-sliding
+            autoSlideMethod: Reveal.navigateNext,
+
+            // Enable slide navigation via mouse wheel
+            mouseWheel: false,
+
+            // Hides the address bar on mobile devices
+            hideAddressBar: true,
+
+            // Opens links in an iframe preview overlay
+            previewLinks: false,
+
+            // Transition style
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Transition speed
+            transitionSpeed: 'default', // default/fast/slow
+
+            // Transition style for full page slide backgrounds
+            backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+
+            // Number of slides away from the current that are visible
+            viewDistance: 3,
+
+            // Parallax background image
+            parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+            // Parallax background size
+            parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
+
+            // Number of pixels to move the parallax background per slide
+            // - Calculated automatically unless specified
+            // - Set to 0 to disable movement along an axis
+            parallaxBackgroundHorizontal: null,
+            parallaxBackgroundVertical: null,
+
+            // The display mode that will be used to show slides
+            display: 'block'
+
+        });
+
+                $(function() {
+
+                    var mark = function() {
+
+                        // Read input
+                        var inputstring = $(this).prev().val();
+                        if (inputstring.trim() === "") {
+                            console.log("input string empty");
+                            return;
+                        }
+
+                        // Create regex
+                        var flags = "gim"; //inputstring.replace(/.*\/([gimy]*)$/, '$1');
+                        //    var pattern = inputstring.replace(new RegExp('^/(.*?)/' + flags + '$'), '$1');
+                        var pattern = inputstring; //.replace(new RegExp('^/(.*?)/' + flags + '$'), '$1');
+
+                        var regex = new RegExp(pattern, flags);
+
+                        var options = {
+                            className: "test"
+                        };
+
+                        // Mark the regex inside the contex
+                        var object = $(this).parent().parent().parent().parent().prev();
+                        object.unmark({
+                            done: function() {
+                                object.markRegExp(regex, options);
+                            }
+                        });
+                    };
+                    var unmark = function() {
+
+                        // Mark the regex inside the contex
+                        $(this).parent().parent().parent().parent().prev().unmark();
+
+                    };
+
+                    // Trigger mark action on button click
+                    $("button[name='mark']").on("click", mark);
+                    // Trigger mark action on button click
+                    $("button[name='clear']").on("click", unmark);
+
+                });
+
+            } //]]> 
+    </script>
+
+
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h1>Reguläre Ausdrücke</h1>
+                <h2> - Eine Schulung für Fachanwender - </h2>
+                <!--<div class="document"></div>-->
+            </section>
+            <section>
+                <h2>Ziel der Schulung</h2>
+
+                <!-- <div class="content">-->
+                In dieser Schulung soll das Konzept der regulären Ausdrücke insbesondere für Fachanwender erläutert werden.</br>
+                Zu Beginn einfache Beispielübungen sollen diese Anwender zur Nutzung diese mächtigen Werkzeuges befähigen.</br>
+                Technische Vorkenntnisse werden nicht vorausgesetzt, jedoch sind Grundkenntnisse in Office hilfreich.</br>
+                <!--</div>-->
+            </section>
+            <section>
+                <h2> Was sind reguläre Ausdrücke?</h2>
+
+                <!-- <div class="content">-->
+                Der Begriff „regulärer Ausdruck“ kommt aus der Informatik. Diese dient im wesentlichen zur Beschreibung von Zeichenketten in einem eher theoretischen Zusammenhang („reguläre Sprachen“).</br>
+                Unabhängig davon kann dieses Konzept für ein sehr mächtiges und zielgerichtetes „Suchen und Ersetzen“ verwendet werden. Unter anderem bieten Excel und notepad++ diese Funktionalität.</br>
+                <!--</div>-->
+            </section>
+            <section>
+                <h2>Schulungsumgebung</h2>
+
+                <!-- <div class="content">-->
+                Für die Schulung beabsichtigen wir ein sogenanntes Notebook zur Verfügung zu stellen, in dem die regulären Ausdrücke erprobt werden können und die Lösung von Übungsaufgaben selbstverantwortlich kontrolliert werden kann.</br>
+                Bislang ist nicht klar, auf welcher Plattform dies durchgeführt werden soll. Hier bieten sich google cloud services, microsoft azure oder eine lokale installation an. Inwieweit cloudera hier angemessen wäre ist zu klären.</br>
+                <!--</div>-->
+            </section>
+            <section>
+                <h2>Schulungskonzeption</h2>
+
+                <!-- <div class="content">-->
+                Beschreibung der Schulungsumgebung und Vorgehensweise (noch offen, tbd).</br>
+                <!--</div>-->
+            </section>
+            <section>
+                <h3>Lektion 1: Zeichen, Zahlen und Sonderzeichen</h3>
+
+                <!-- <div class="content">-->
+                Wenn wir in der Praxis von Textdarstellungen sprechen, so geht es im wesentlichen um drei immer um drei Gruppen:</br>
+                <ol>
+                    <li>Zeichen (a,b,c, … , z,A,B,C, … ,Z)</li>
+                    <li>Zahlen (0,1,2, … 9)</li>
+                    <li>Sonderzeichen (jedes „Textstückchen“, das nicht bereits schon oben dargestellt ist, z.B. !“§%&amp; usw.)</li>
+                </ol>
+                Meistens wird hier der sog. ASCII Code verwendet, siehe hierzu <a href="https://de.wikipedia.org/wiki/American_Standard_Code_for_Information_Interchange">ASCII Tabellen</a> im Netz. Für die Übung stellen wir uns nun einen „Automaten“ vor, der für gegebene Zeichenketten Teilstrings findet. Wie er das tut, ist in diesem Schritt egal.
+                <!--</div>-->
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

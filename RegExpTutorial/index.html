@@ -1,281 +1,481 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="googlebot" content="noindex, nofollow">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
 
-<!--    <link rel="stylesheet" type="text/css" href="/css/result-light.css">-->
-      <script type="text/javascript" src="jquery-latest.min.js"></script>
-      <script type="text/javascript" src="bootstrap.min.js"></script>
-      <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-      <script type="text/javascript" src="jquery.mark.min.js"></script>
-  <style type="text/css">
-    h1 {
-        counter-reset: h2counter;
-    }
-    h2:before {
-        content: counter(h2counter) ".\0000a0\0000a0";
-        counter-increment: h2counter;
-        counter-reset: h3counter;
-    }
-    h3:before {
-        content: counter(h2counter) "." counter(h3counter) ".\0000a0\0000a0";
-        counter-increment: h3counter;
-    }
+    <!--    <link rel="stylesheet" type="text/css" href="/css/result-light.css">-->
+    <script type="text/javascript" src="jquery-latest.min.js"></script>
+    <script type="text/javascript" src="bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <script type="text/javascript" src="jquery.mark.min.js"></script>
+    <script type="text/javascript" src="reveal.js"></script>
+    <link rel="stylesheet" type="text/css" href="reveal.css">
+    <link rel="stylesheet" type="text/css" href="white.css">
+    <style type="text/css">
+        h1 {
+            counter-reset: h2counter;
+        }
+        h2:before {
+            content: counter(h2counter) ".\0000a0\0000a0";
+            counter-increment: h2counter;
+            counter-reset: h3counter;
+        }
+        h3:before {
+            content: counter(h2counter) "." counter(h3counter) ".\0000a0\0000a0";
+            counter-increment: h3counter;
+        }
+        body {
+            /*margin: 15px;*/
+            counter-reset: h2counter;
+        }
+        div.search span,
+        div.search input[name="regex"] {
+            display: block;
+        }
+        div.search input[name="regex"],
+        button {
+/*            margin-top: 4px;
+            margin-left:auto;
+            margin-right:auto;*/
+        }
+        div.panel {
+            /*margin-bottom: 15px;*/
+            margin: auto;
+        }
+        div.panel .panel-body p:last-child {
+            margin-bottom: 0;
+        }
+        mark {
+            padding: 0;
+        }
+    </style>
 
-    body {
-  margin: 15px;
-        counter-reset: h2counter;
-
-}
-
-div.search span,
-div.search input[name="regex"] {
-  display: block;
-}
-
-div.search input[name="regex"],
-button {
-  margin-top: 4px;
-}
-
-div.panel {
-  margin-bottom: 15px;
-}
-
-div.panel .panel-body p:last-child {
-  margin-bottom: 0;
-}
-
-mark {
-  padding: 0;
-}
-
-  </style>
-
-  <title>Reguläre Ausdrücke - Eine Schulung für Fachanwender</title>
+    <title>Reguläre Ausdrücke - Eine Schulung für Fachanwender</title>
 
 
-<script type='text/javascript'>//<![CDATA[
-window.onload=function(){
-$(function() {
+    <script type='text/javascript'>
+        //<![CDATA[
+        window.onload = function() {
+                $(function() {
 
-  var mark = function() {
+Reveal.initialize({
 
-    // Read input
-    var inputstring = $(this).prev().val();
-    if (inputstring.trim() === "") {
-      console.log("input string empty");
-      return;
-    }
+            // Display presentation control arrows
+            controls: true,
 
-    // Create regex
-    var flags = "gim";//inputstring.replace(/.*\/([gimy]*)$/, '$1');
-//    var pattern = inputstring.replace(new RegExp('^/(.*?)/' + flags + '$'), '$1');
-    var pattern = inputstring;//.replace(new RegExp('^/(.*?)/' + flags + '$'), '$1');
+            // Help the user learn the controls by providing hints, for example by
+            // bouncing the down arrow when they first encounter a vertical slide
+            controlsTutorial: true,
 
-    var regex = new RegExp(pattern, flags);
+            // Determines where controls appear, "edges" or "bottom-right"
+            controlsLayout: 'bottom-right',
 
-    var options = {
-      className: "test"
-    };
+            // Visibility rule for backwards navigation arrows; "faded", "hidden"
+            // or "visible"
+            controlsBackArrows: 'faded',
 
-    // Mark the regex inside the contex
-    var object=$(this).parent().parent().parent().parent().prev();
-    object.unmark({
-      done: function() {
-        object.markRegExp(regex, options);
-      }
-    });
-  };
-  var unmark = function() {
+            // Display a presentation progress bar
+            progress: true,
 
-    // Mark the regex inside the contex
-    $(this).parent().parent().parent().parent().prev().unmark();
-    
-  };
+            // Set default timing of 2 minutes per slide
+            defaultTiming: 120,
 
-  // Trigger mark action on button click
-  $("button[name='mark']").on("click", mark);
-  // Trigger mark action on button click
-  $("button[name='clear']").on("click", unmark);
+            // Display the page number of the current slide
+            slideNumber: true,
 
-});
+            // Push each slide change to the browser history
+            history: true,
 
-}//]]> 
+            // Enable keyboard shortcuts for navigation
+            keyboard: true,
 
-</script>
+            // Enable the slide overview mode
+            overview: true,
 
-  
+            // Vertical centering of slides
+            center: false,
+
+            // Enables touch navigation on devices with touch input
+            touch: true,
+
+            // Loop the presentation
+            loop: false,
+
+            // Change the presentation direction to be RTL
+            rtl: false,
+
+            // Randomizes the order of slides each time the presentation loads
+            shuffle: false,
+
+            // Turns fragments on and off globally
+            fragments: true,
+
+            // Flags if the presentation is running in an embedded mode,
+            // i.e. contained within a limited portion of the screen
+            embedded: false,
+
+            // Flags if we should show a help overlay when the questionmark
+            // key is pressed
+            help: true,
+
+            // Flags if speaker notes should be visible to all viewers
+            showNotes: false,
+
+            // Global override for autoplaying embedded media (video/audio/iframe)
+            // - null: Media will only autoplay if data-autoplay is present
+            // - true: All media will autoplay, regardless of individual setting
+            // - false: No media will autoplay, regardless of individual setting
+            autoPlayMedia: null,
+
+            // Number of milliseconds between automatically proceeding to the
+            // next slide, disabled when set to 0, this value can be overwritten
+            // by using a data-autoslide attribute on your slides
+            autoSlide: 0,
+
+            // Stop auto-sliding after user input
+            autoSlideStoppable: true,
+
+            // Use this method for navigation when auto-sliding
+            autoSlideMethod: Reveal.navigateNext,
+
+            // Enable slide navigation via mouse wheel
+            mouseWheel: false,
+
+            // Hides the address bar on mobile devices
+            hideAddressBar: true,
+
+            // Opens links in an iframe preview overlay
+            previewLinks: false,
+
+            // Transition style
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Transition speed
+            transitionSpeed: 'default', // default/fast/slow
+
+            // Transition style for full page slide backgrounds
+            backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+
+            // Number of slides away from the current that are visible
+            viewDistance: 3,
+
+            // Parallax background image
+            parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+            // Parallax background size
+            parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
+
+            // Number of pixels to move the parallax background per slide
+            // - Calculated automatically unless specified
+            // - Set to 0 to disable movement along an axis
+            parallaxBackgroundHorizontal: null,
+            parallaxBackgroundVertical: null,
+
+            // The display mode that will be used to show slides
+            display: 'block',
+            width: "100%",
+            height: "100%",
+            margin: 0.03,
+            minScale: 1,
+            maxScale: 1
+        });
+
+                    var mark = function() {
+
+                        // Read input
+                        var inputstring = $(this).prev().val();
+                        if (inputstring.trim() === "") {
+                            console.log("input string empty");
+                            return;
+                        }
+
+                        // Create regex
+                        var flags = "gim"; //inputstring.replace(/.*\/([gimy]*)$/, '$1');
+                        //    var pattern = inputstring.replace(new RegExp('^/(.*?)/' + flags + '$'), '$1');
+                        var pattern = inputstring; //.replace(new RegExp('^/(.*?)/' + flags + '$'), '$1');
+
+                        var regex = new RegExp(pattern, flags);
+
+                        var options = {
+                            className: "test"
+                        };
+
+                        // Mark the regex inside the contex
+                        var object = $(this).parent().parent().parent().parent().prev();
+                        var expectedresult=$(this).next().next().text();
+                        var check = $(this).next().next().next();
+                        object.unmark({
+                            done: function() {
+                                object.markRegExp(regex, options);
+                                var result = object.find('.test').map(function() {
+                                            return this.innerHTML;
+                                        }).get().join(',');
+                                        if (result === expectedresult) {
+                                            check.attr("style","color:green;font-size:0.5em;");
+                                            check.html("Ergebnis ist richtig selektiert");
+                                        } else {
+                                            check.attr("style","color:red;font-size:0.5em;");
+                                            check.html("Ergebnis ist falsch selektiert");
+                                        }
+
+                            }
+                        });
+                    };
+                    var unmark = function() {
+
+                        // Mark the regex inside the contex
+                        $(this).parent().parent().parent().parent().prev().unmark();
+
+                    };
+
+                    // Trigger mark action on button click
+                    $("button[name='mark']").on("click", mark);
+                    // Trigger mark action on button click
+                    $("button[name='clear']").on("click", unmark);
+
+                });
+
+            } //]]> 
+    </script>     
+<!--
+                                    <script>
+                                    </script>
+-->
+   
+
+
 </head>
 
 <body>
-  <h1>Reguläre Ausdrücke - Eine Schulung für Fachanwender</h1>
-  <div class="document">
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h1>Reguläre Ausdrücke</h1>
+                <big>Eine Schulung für Fachanwender</big>
+                <!--<div class="document"></div>-->
+            </section>
+            <section>
+                <h2>Ziel der Schulung</h2>
 
-<h2>Ziel der Schulung</h2>
+                <!-- <div class="content">-->
+                <p>In dieser Schulung soll das Konzept der regulären Ausdrücke insbesondere für Fachanwender erläutert werden.</p>
+                <p>Zu Beginn einfache Beispielübungen sollen diese Anwender zur Nutzung diese mächtigen Werkzeuges befähigen.</p>
+                <p>Technische Vorkenntnisse werden nicht vorausgesetzt, jedoch sind Grundkenntnisse in Office hilfreich.</p>
+                <!--</div>-->
+                <p></p>
+                <p></p>
+                <h2> Was sind reguläre Ausdrücke?</h2>
 
-<div class="content">
-In dieser Schulung soll das Konzept der regulären Ausdrücke insbesondere für Fachanwender erläutert werden.</br>
-Zu Beginn einfache Beispielübungen sollen diese Anwender zur Nutzung diese mächtigen Werkzeuges befähigen.</br>
-Technische Vorkenntnisse werden nicht vorausgesetzt, jedoch sind Grundkenntnisse in Office hilfreich.</br>
-</div>
-<h2> Was sind reguläre Ausdrücke?</h2>
+                <!-- <div class="content">-->
+                <p>Der Begriff „regulärer Ausdruck“ kommt aus der Informatik. Diese dient im wesentlichen zur Beschreibung von Zeichenketten in einem eher theoretischen Zusammenhang („reguläre Sprachen“).</p>
+                <p>Unabhängig davon kann dieses Konzept für ein sehr mächtiges und zielgerichtetes „Suchen und Ersetzen“ verwendet werden. Unter anderem bieten Excel und Notepad++ diese Funktionalität.</p>
+                <!--</div>-->
+            </section>
+            <section>
+                <h2>Schulungsumgebung</h2>
 
-<div class="content">
-Der Begriff „regulärer Ausdruck“ kommt aus der Informatik. Diese dient im wesentlichen zur Beschreibung von Zeichenketten in einem eher theoretischen Zusammenhang („reguläre Sprachen“).</br>
-Unabhängig davon kann dieses Konzept für ein sehr mächtiges und zielgerichtetes „Suchen und Ersetzen“ verwendet werden. Unter anderem bieten Excel und notepad++ diese Funktionalität.</br>
-</div>
+                <!-- <div class="content">-->
+                Für die Schulung beabsichtigen wir ein sogenanntes Notebook zur Verfügung zu stellen, in dem die regulären Ausdrücke erprobt werden können und die Lösung von Übungsaufgaben selbstverantwortlich kontrolliert werden kann.<br/>
+                Bislang ist nicht klar, auf welcher Plattform dies durchgeführt werden soll. Hier bieten sich google cloud services, microsoft azure oder eine lokale installation an. Inwieweit cloudera hier angemessen wäre ist zu klären.<br/>
+                <!--</div>-->
+                <p></p>
+                <p></p>
+                <h2>Schulungskonzeption</h2>
 
-<h2>Schulungsumgebung</h2>
+                <!-- <div class="content">-->
+                Beschreibung der Schulungsumgebung und Vorgehensweise (noch offen, tbd).<br/>
+                <!--</div>-->
+            </section>
+            <section>
+                <h2>Lektion 1: Zeichen, Zahlen und Sonderzeichen</h2>
 
-<div class="content">
-Für die Schulung beabsichtigen wir ein sogenanntes Notebook zur Verfügung zu stellen, in dem die regulären Ausdrücke erprobt werden können und die Lösung von Übungsaufgaben selbstverantwortlich kontrolliert werden kann.</br>
-Bislang ist nicht klar, auf welcher Plattform dies durchgeführt werden soll. Hier bieten sich google cloud services, microsoft azure oder eine lokale installation an. Inwieweit cloudera hier angemessen wäre ist zu klären.</br>
-</div>
+                <!-- <div class="content">-->
+                Wenn wir in der Praxis von Textdarstellungen sprechen, so geht es im wesentlichen um drei immer um drei Gruppen:<br/>
+                <ol>
+                    <li>Zeichen (a,b,c, … , z,A,B,C, … ,Z)</li>
+                    <li>Zahlen (0,1,2, … 9)</li>
+                    <li>Sonderzeichen (jedes „Textstückchen“, das nicht bereits schon oben dargestellt ist, z.B. !“§%&amp; usw.)</li>
+                </ol>
+                Meistens wird hier der sog. ASCII Code verwendet, siehe hierzu <a href="https://de.wikipedia.org/wiki/American_Standard_Code_for_Information_Interchange">ASCII Tabellen</a> im Netz. Für die Übung stellen wir uns nun einen „Automaten“ vor, der für gegebene Zeichenketten Teilstrings findet. Wie er das tut, ist in diesem Schritt egal.
+                                <!--</div>-->
+            </section>
+            <section>
 
-<h2>Schulungskonzeption</h2>
+                <h2>Übung 1: Zeichen, Zahlen und Sonderzeichen</h2>
 
-<h3>Schulungskonzeption</h3>
+                <h3> Übung 1a: Zeichen</h3> 
+                <div>1. Definiere Teilzeichenkette, die die Commerzbank BICs herausfiltern.<a href="#" onclick="$(this).next().toggle();return false;"><small>Lösung</small></a><div class="OurSolution" style="display:none"><code>COBADEFF</code></div>
+                </div>
 
-<div class="content">
-Beschreibung der Schulungsumgebung und Vorgehensweise (noch offen, tbd).</br>
-</div>
-
-<h3>Lektion 1: Zeichen, Zahlen und Sonderzeichen</h3>
-
-<div class="content">
-Wenn wir in der Praxis von Textdarstellungen sprechen, so geht es im wesentlichen um drei immer um drei Gruppen:</br>
-<ol>
-<li>Zeichen (a,b,c, … , z,A,B,C, … ,Z)</li>
-<li>Zahlen (0,1,2, … 9)</li>
-<li>Sonderzeichen (jedes „Textstückchen“, das nicht bereits schon oben dargestellt ist, z.B. !“§%& usw.)</li>
-</ol>
-Meistens wird hier der sog. ASCII Code verwendet, siehe hierzu <a href="https://de.wikipedia.org/wiki/American_Standard_Code_for_Information_Interchange">ASCII Tabellen</a> im Netz.
-Für die Übung stellen wir uns nun einen „Automaten“ vor, der für gegebene Zeichenketten Teilstrings findet. Wie er das tut, ist in diesem Schritt egal.
-</div>
-
-<h3>Übung 1: Zeichen, Zahlen und Sonderzeichen</h3>
-
-<h4> Übung 1a: Zeichen</h4>
-Im Beispiel sind folgende Zeichenketten (hier BICs) gegeben:
-<div>
-<div class="test">
-<pre>
+                <div>
+                    <div class="test">
+                        <pre>
 COBADEFFXXX
 DEUTDEFFXXX
 COBADEFFXXX
 </pre>
-</div>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="search row">
-      <div class="col-xs-6">
-        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<ol type="a">
-  <li>Definiere Teilzeichenkette, die die Commerzbank BICs herausfiltern. </li>
-<li>Welches Zeichen charakterisiert Commerzbank BICs im Beispiel minimal (Achtung: Die Lösung ist nicht eindeutig).</li>
-<li>Der Dezimale Ascii Code 40 stellt die linksoffene Klammer dar und kann mit der Tastenkombination Alt – 40 (Ziffernpad) abgerufen werden. Wie lautet der Ascii Code für das Zeichen „@“ ?</li>
-</ol>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="search row">
+                                <div class="col-xs-6">
+                                    <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+                                    <button type="button" name="mark" class="btn btn-primary">Check</button>
+                                    <button type="button" name="clear" class="btn btn-primary">Clear</button>
+                                    <div class="expectedResult" style="display:none">COBADEFF,COBADEFF</div>
+                                    <div class="currentResult"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                <p></p>
 
+               <div>2. Welches Zeichen charakterisiert Commerzbank BICs im Beispiel minimal (Achtung: Die Lösung ist nicht eindeutig).<a href="#" onclick="$(this).next().toggle();return false;"><small>Lösung</small></a><div class="OurSolution" style="display:none"><code>COBA</code></div></div><br/>
 
+                <div>
+                    <div class="test">
+                        <pre>
+COBADEFFXXX
+DEUTDEFFXXX
+COBADEFFXXX
+</pre>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="search row">
+                                <div class="col-xs-6">
+                                    <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+                                    <button type="button" name="mark" class="btn btn-primary">Check</button>
+                                    <button type="button" name="clear" class="btn btn-primary">Clear</button>
+                                    <div class="expectedResult" style="display:none">COBADEFF,COBADEFF</div>
+                                    <div class="currentResult"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                <p></p>
 
-<h4>Übung 1b: Ziffern</h4>
+                    <div>3. Der Dezimale Ascii Code 40 stellt die linksoffene Klammer dar und kann mit der Tastenkombination Alt – 40 (Ziffernpad) abgerufen werden. Wie lautet der Ascii Code für das Zeichen „@“ ?<a href="#" onclick="$(this).next().toggle();return false;"><small>Lösung</small></a><div class="OurSolution" style="display:none"><code>ALT - 64</code></div></div>
+                <div>
+                    <div class="test">
+                        <pre>
+COBADEFFXXX
+DEUTDEFFXXX
+COBADEFFXXX
+</pre>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="search row">
+                                <div class="col-xs-6">
+                                    <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+                                    <button type="button" name="mark" class="btn btn-primary">Check</button>
+                                    <button type="button" name="clear" class="btn btn-primary">Clear</button>
+                                    <div class="expectedResult" style="display:none">COBADEFF,COBADEFF</div>
+                                    <div class="currentResult"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                <p></p>
 
-In einem Kommentarfeld werden Nachrichtentypen wie
-<div>
-<div class="test">
-  <pre>
+                <h3>Übung 1b: Ziffern</h3> In einem Kommentarfeld werden Nachrichtentypen wie
+                <div>
+                    <div class="test">
+                        <pre>
 103 from 12.03.2016
 MT103 dated Nov. 2016
 MT202 blabla
 Your 202
 Your MT202Cov
 </pre>
-</div>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="search row">
-      <div class="col-xs-6">
-        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<ol type="a">
-  <li>Definiere Teilzeichenkette, die nur aus Ziffern besteht und nur Text anzeigt, der sich auf den Nachrichtentyp MT103 bezieht.</li>
-  <li>Ist es möglich nur mit Ziffern alle Texte zu finden, die sich auf MT202xxx Transaktionen beziehen?</li>
-</ol>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="search row">
+                                <div class="col-xs-6">
+                                    <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+                                    <button type="button" name="mark" class="btn btn-primary">Check</button>
+                                    <button type="button" name="clear" class="btn btn-primary">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ol type="a">
+                    <li>Definiere Teilzeichenkette, die nur aus Ziffern besteht und nur Text anzeigt, der sich auf den Nachrichtentyp MT103 bezieht.<a href="#" onclick="$(this).next().toggle();return false;"><small>Lösung</small></a><div class="OurSolution" style="display:none"><code>103</code></div></li>
+                    <li>Ist es möglich nur mit Ziffern alle Texte zu finden, die sich auf MT202xxx Transaktionen beziehen?<a href="#" onclick="$(this).next().toggle();return false;"><small>Lösung</small></a><div class="OurSolution" style="display:none"><code>.*MT202.*</code></div></li>
+                </ol>
 
-
-
-<h4>Übung 1c: Sonderzeichen</h4>
-<div class="content">
-Sonderzeichen sind ein spezielles Thema. So bezeichnet der Punkt „.“ etwa eine Joker (wildcard) für ein beliebiges Zeichen (warum so etwas überhaupt Sinn macht erklären wir später). Für ein Sonderzeichen (also z.B. den Punkt) benötigt man eine spezielle Kennzeichnung, man muss dem Automat sagen dass jetzt das Zeichen Punkt kommt und nicht der wildcard. Dazu verwendet man den backslash: „ \.“. 
-Betrachte folgende Beispiele:
-</div>
-<div>
-<div class="test">
-  <pre>
+            </section>
+            <section>
+                <h4>Übung 1c: Sonderzeichen</h4>
+                <!-- <div class="content">-->
+                Sonderzeichen sind ein spezielles Thema. So bezeichnet der Punkt „.“ etwa eine Joker (wildcard) für ein beliebiges Zeichen (warum so etwas überhaupt Sinn macht erklären wir später). Für ein Sonderzeichen (also z.B. den Punkt) benötigt man eine spezielle Kennzeichnung, man muss dem Automat sagen dass jetzt das Zeichen Punkt kommt und nicht der wildcard. Dazu verwendet man den backslash: „ \.“. Betrachte folgende Beispiele:
+                <!--</div>-->
+                <div>
+                    <div class="test">
+                        <pre>
 123.00 EUR
 123.24 USD
 MT103
 </pre>
-</div>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="search row">
-      <div class="col-xs-6">
-        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="content">
-  <ol type="a">
-    <li>Finde über ein Sonderzeichen alle Textketten, die wie ein Betrag aussehen.</li>
-<li>Was würde passieren, wenn wir die obige Beispielliste um 100 SGD erweitern und dann die Abfrage unter a) erneut durchführen?</li>
-</ol>
-</div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="search row">
+                                <div class="col-xs-6">
+                                    <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+                                    <button type="button" name="mark" class="btn btn-primary">Check</button>
+                                    <button type="button" name="clear" class="btn btn-primary">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="content">-->
+                <ol type="a">
+                    <li>Finde über ein Sonderzeichen alle Textketten, die wie ein Betrag aussehen.</li>
+                    <li>Was würde passieren, wenn wir die obige Beispielliste um 100 SGD erweitern und dann die Abfrage unter a) erneut durchführen?</li>
+                </ol>
+                <!--</div>-->
+            </section>
+            <section>
+                <h3>Lektion 2: Ein Zeichen einschließen oder ausschließen</h3>
 
-<h3>Lektion 2: Ein Zeichen einschließen oder ausschließen</h3>
+                <!-- <div class="content">-->
+                In dieser Lektion betrachten wir das einschließen oder ausschließen eines einzelnen Zeichens bei der Suche in einem Text. Die Syntax hierfür ist nicht besonders schwer:
+                <ol>
+                    <li><code>[abc]</code> bezeichnet ein Zeichen, das a, b oder c ist</li>
+                    <li><code>[^abc]</code> bezeichnet ein Zeichen, das nicht a, b oder c ist.</li>
+                </ol>
+                Mit diesem Baustein kann man nun differenziert Texte auswählen, wie wir in der nachfolgenden Übung sehen werden. Manchmal ist es sinnvoll ganze Bereiche zu Kennzeichnen:
+                <ol>
+                    <li><code>[a-z]</code> bezeichnet ein Zeichen „zwischen“ a und z</li>
+                    <li><code>[0-9]</code> bezeichnet eine Zahl „zwischen“ 0 und 9.</li>
+                </ol>
 
-<div class="content">
-In dieser Lektion betrachten wir das einschließen oder ausschließen eines einzelnen Zeichens bei der Suche in einem Text.
-Die Syntax hierfür ist nicht besonders schwer:
-<ol>
-  <li><code>[abc]</code> bezeichnet ein Zeichen, das a, b oder c ist</li>
-<li><code>[^abc]</code> bezeichnet ein Zeichen, das nicht a, b oder c ist.</li>
-</ol>
-Mit diesem Baustein kann man nun differenziert Texte auswählen, wie wir in der nachfolgenden Übung sehen werden. 
-Manchmal ist es sinnvoll ganze Bereiche zu Kennzeichnen:
-<ol>
-  <li><code>[a-z]</code> bezeichnet ein Zeichen „zwischen“ a und z</li>
-  <li><code>[0-9]</code> bezeichnet eine Zahl „zwischen“ 0 und 9.</li>
-</ol>
+                Dies wollen wir in nachfolgender Übung vertiefen.
+                <!--</div>-->
+            </section>
+            <section>
+                <h3>Übung 2: Ein Zeichen einschließen oder ausschließen</h3>
+                <!-- <div class="content">-->
+                In dieser Übung betrachten wir die folgende Sammlung von IBANs und Kontonummern:
+                <!--</div>-->
 
-Dies wollen wir in nachfolgender Übung vertiefen.
-</div>
-
-<h3>Übung 2: Ein Zeichen einschließen oder ausschließen</h3>
-<div class="content">
-In dieser Übung betrachten wir die folgende Sammlung von IBANs und Kontonummern:
-</div>
-
-<div>
-<div class="test">
-<pre>
+                <div>
+                    <div class="test">
+                        <pre>
 DE27100777770209299700 
 DE11520513735120710131 
 AT411100000237571500
@@ -287,80 +487,87 @@ EE342200221034126658
 8051465
 78988798654
 </pre>
-</div>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="search row">
-      <div class="col-xs-6">
-        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="content">
-  <ol type="a">
-<li>Finde alle IBANs, die mit D beginnen (Tipp:verwende hierfür die [ ] - Syntax).</li>
-<li>Finde alle IBANs, die nicht mit D beginnen.</li>
-<li>Finde alle IBANs, die mit DE beginnen (Tip: wende die [ ] – Syntax zweimal an).</li>
-<li>Finde alle IBANs im Text (Tip: Bereich)</li>
-<li>Finde alle Kontonummern (Tip: Den Anfang einer Zeile kennzeichnet man mit ^).</li>
-</ol>
-</div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="search row">
+                                <div class="col-xs-6">
+                                    <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+                                    <button type="button" name="mark" class="btn btn-primary">Check</button>
+                                    <button type="button" name="clear" class="btn btn-primary">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="content">-->
+                <ol type="a">
+                    <li>Finde alle IBANs, die mit D beginnen (Tipp:verwende hierfür die [ ] - Syntax).</li>
+                    <li>Finde alle IBANs, die nicht mit D beginnen.</li>
+                    <li>Finde alle IBANs, die mit DE beginnen (Tip: wende die [ ] – Syntax zweimal an).</li>
+                    <li>Finde alle IBANs im Text (Tip: Bereich)</li>
+                    <li>Finde alle Kontonummern (Tip: Den Anfang einer Zeile kennzeichnet man mit ^).</li>
+                </ol>
+                <!--</div>-->
+            </section>
+            <section>
+                <h3>Lektion 3: Wiederholungsfaktoren</h3>
+                <!-- <div class="content">-->
+                Mittlerweile wissen wir schon, wie man durch Wiederholung (DE) Ausdrücke erkennen kann. Da man nicht alles Tippen will gibt es Wiederholungsfaktoren:
+                <ol>
+                    <li><code>{n}</code> muss n-mal vorkommen</li>
+                    <li><code>{min,}</code> muss mindestens min mal vorkommen</li>
+                    <li><code>{0,max}</code> darf höchstens max mal vorkommen</li>
+                    <li><code>{min,max}</code> kommt mindestens min mal und höchstens max mal vor</li>
+                </ol>
 
-<h3>Lektion 3: Wiederholungsfaktoren</h3>
-<div class="content">
-Mittlerweile wissen wir schon, wie man durch Wiederholung (DE) Ausdrücke erkennen kann. Da man nicht alles Tippen will gibt es Wiederholungsfaktoren:
-<ol>
-<li><code>{n}</code>  muss n-mal vorkommen</li>
-<li><code>{min,}</code> muss mindestens min mal vorkommen</li>
-<li><code>{0,max}</code> darf höchstens max mal vorkommen</li>
-<li><code>{min,max}</code> kommt mindestens min mal und höchstens max mal vor</li>
-</ol>
+                Einige Fälle werden mit eigenen Symbolen versehen (?, * oder +):
 
-Einige Fälle werden mit eigenen Symbolen versehen (?, * oder +):
+                <ol>
+                    <li><code>{0,}</code> oder * kommt beliebig oft vor</li>
+                    <li><code>{1,}</code> oder + kommt mindestens einmal vor</li>
+                    <li><code>{0,1}</code> oder ? ist optional, kommt 1 mal oder gar nicht vor.</li>
+                </ol>
 
-<ol>
-<li><code>{0,}</code> oder * kommt beliebig oft vor</li>
-<li><code>{1,}</code> oder + kommt mindestens einmal vor</li>
-<li><code>{0,1}</code>  oder ? ist optional, kommt 1 mal oder gar nicht vor.</li>
-</ol>
+                Z.B. Ergibt <code>[a]+</code> Treffer die Zeichenfolgen: a oder aa oder aaa , usw.<br/>
+                Achtung: <code>a*</code> trifft immer irgendwas, denn jede Zeichenfolge enthält 0 mal das Zeichen a.<br/>
 
-Z.B. Ergibt <code>[a]+</code> Treffer die Zeichenfolgen: a oder aa oder aaa , usw.</br>
-Achtung: <code>a*</code>  trifft immer irgendwas, denn jede Zeichenfolge enthält 0 mal das Zeichen a.</br>
+                Diese Wiederholungsfaktoren sind gierig (greedy), dass heißt, sie versuchen möglichst treffen. Dies kann man sehr schön an einem Beispiel sehen:<br/>
+                Beispiel: Schauen wir uns den Text ABCDEB an. Dann trifft der reguläre Ausdruck <code>A.*B</code> nicht nur AB sondern findet ABCDEB.<br/>
+                Tatsächlich kann man diese Suche auch lazy schalten. Dies wird durch ein nachgestelltes Fragezeichen erreicht.<br/>
+                Beispiel: Schauen wir uns den Text ABCDEB an. Dann trifft der reguläre Ausdruck <code>A.*?B</code> tatsächlich <code>AB.</code>
+                <br/>
+                In den nachfolgenden Übungen versuchen wir nun das Verständnis für Wiederholungsfaktoren zu schärfen.<br/>
+                <!--</div>-->
+            </section>
+            <section>
+                <h3>Übung 3: Wiederholungsfaktoren</h3>
+                <!-- <div class="content">-->
+                Wir verwenden wieder das Beispiel aus Übung 4.5.
 
-Diese Wiederholungsfaktoren sind gierig (greedy), dass heißt, sie versuchen möglichst treffen. Dies kann man sehr schön an einem Beispiel sehen:</br>
-Beispiel: Schauen wir uns den Text ABCDEB an. Dann trifft der reguläre Ausdruck <code>A.*B</code> nicht nur AB sondern findet ABCDEB.</br>
-Tatsächlich kann man diese Suche auch lazy schalten. Dies wird durch ein nachgestelltes Fragezeichen erreicht.</br>
-Beispiel: Schauen wir uns den Text ABCDEB an. Dann trifft der reguläre Ausdruck <code>A.*?B</code> tatsächlich <code>AB.</code></br>
-In den nachfolgenden Übungen versuchen wir nun das Verständnis für Wiederholungsfaktoren zu schärfen.</br>
-</div>
-
-<h3>Übung 3: Wiederholungsfaktoren</h3>
-<div class="content">
-Wir verwenden wieder das Beispiel aus Übung 4.5.
-
-<ol type="a">
-<li>Finde alle IBANS, die mit einem A beginnen, dann einen beliebigen Buchstaben haben gefolgt von einer beliebigen Folge von Ziffern.</li>
-<li>Wie a) jedoch mit 01 am Ende.</li>
-</ol>
-</div>
-
-<h3>Lektion 4: Leerzeichen und andere Hürden</h3>
-<div class="content">
-Als Ergänzung zu obigen Lektionen sei hier noch erwähnt, dass mit <code>\d</code> eine Ziffer bezeichnet wird und mit <code>\D</code> eine Nicht – Ziffer. Analog bezeichnet <code>\w</code> ein alphanumerisches (Ziffern und Zeichen!) und <code>\W</code> ein nicht alphanumerisches Zeichen.</br>
-Oftmals benötigt man das mit <code>\s</code> bezeichnete Leerzeichen (whitespace charakter) und als Gegenstück <code>\S</code> das Nicht – Leerzeichen.</br>
-Anwendungsmöglichkeiten werden wir in der nachfolgenden Übung aufzeigen.</br>
-Eine fortgeschrittene Ergänzung hierzu ist das Erkennen von Tabulatoren (<code>\t</code>) Zeilenumbrüchen (<code>\r</code>).</br>
-</div>
-<h3>Übung 4: Leerzeichen und andere Hürden</h3>
-<div class="content">
-Betrachte den folgenden Beispielsatz:
-</div>
-<div>
-<div class="test">
-  <pre>
+                <ol type="a">
+                    <li>Finde alle IBANS, die mit einem A beginnen, dann einen beliebigen Buchstaben haben gefolgt von einer beliebigen Folge von Ziffern.</li>
+                    <li>Wie a) jedoch mit 01 am Ende.</li>
+                </ol>
+            </section>
+            <!--</div>-->
+            <section>
+                <h3>Lektion 4: Leerzeichen und andere Hürden</h3>
+                <!-- <div class="content">-->
+                Als Ergänzung zu obigen Lektionen sei hier noch erwähnt, dass mit <code>\d</code> eine Ziffer bezeichnet wird und mit <code>\D</code> eine Nicht – Ziffer. Analog bezeichnet <code>\w</code> ein alphanumerisches (Ziffern und Zeichen!) und <code>\W</code> ein nicht alphanumerisches Zeichen.<br/>
+                Oftmals benötigt man das mit <code>\s</code> bezeichnete Leerzeichen (whitespace charakter) und als Gegenstück <code>\S</code> das Nicht – Leerzeichen.<br/>
+                Anwendungsmöglichkeiten werden wir in der nachfolgenden Übung aufzeigen.<br/>
+                Eine fortgeschrittene Ergänzung hierzu ist das Erkennen von Tabulatoren (<code>\t</code>) Zeilenumbrüchen (<code>\r</code>).<br/>
+                <!--</div>-->
+            </section>
+            <section>
+                <h3>Übung 4: Leerzeichen und andere Hürden</h3>
+                <!-- <div class="content">-->
+                Betrachte den folgenden Beispielsatz:
+                <!--</div>-->
+                <div>
+                    <div class="test">
+                        <pre>
 DE27 1007 7777 0209 2997 00 
 DE11520513735120710131
 AT411100000237571500
@@ -372,66 +579,69 @@ EE342200221034126658
 8051465
 78 9887986 54
 </pre>
-</div>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="search row">
-      <div class="col-xs-6">
-        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="content">
-<ol type="a">
-<li>Erkenne die deutschen IBANs mit einem regulären Ausdruck, der die verschiedenen obigen Schreibweisen umfasst (Tip: Verwende \d und \s)</li>
-<li>Erkenne Kontonummern, die an beliebigen Stellen (außer am Anfang) Leerzeichen enthalten können.</li>
-</ol>
-</div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="search row">
+                                <div class="col-xs-6">
+                                    <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+                                    <button type="button" name="mark" class="btn btn-primary">Check</button>
+                                    <button type="button" name="clear" class="btn btn-primary">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="content">-->
+                <ol type="a">
+                    <li>Erkenne die deutschen IBANs mit einem regulären Ausdruck, der die verschiedenen obigen Schreibweisen umfasst (Tip: Verwende \d und \s)</li>
+                    <li>Erkenne Kontonummern, die an beliebigen Stellen (außer am Anfang) Leerzeichen enthalten können.</li>
+                </ol>
+                <!--</div>-->
+            </section>
+            <section>
+                <h3>Lektion 5: Der Beginn und der Anfang</h3>
+                <!-- <div class="content">-->
+                Bislang haben wir zumeist nach Vorkommen irgendwo im String geschaut. Um jedoch das zu treffen, was man will, ist es oftmals erforderlich, den regulären Ausdruck möglichst genau auf den Suchbegriff zu fokussieren. Hierbei sind die sogenannten Begrenzer:
+                <ol>
+                    <li>Anfangsmarke : <code>ˆ</code> (Hut) und</li>
+                    <li>Endmarke : <code>$</code> (Dollar Zeichen)</li>
+                </ol>
+                hilfreich.<br/>
 
-<h3>Lektion 5: Der Beginn und der Anfang</h3>
-<div class="content">
-Bislang haben wir zumeist nach Vorkommen irgendwo im String geschaut. Um jedoch das zu treffen, was man will, ist es oftmals erforderlich, den regulären Ausdruck möglichst genau auf den Suchbegriff zu fokussieren. Hierbei sind die sogenannten Begrenzer:
-<ol>
-<li>Anfangsmarke : <code>ˆ</code> (Hut) und</li>
-<li>Endmarke   : <code>$</code> (Dollar Zeichen)</li>
-</ol>
-hilfreich.</br>
-
-Hierbei ist zu beachten, dass diese Zeichen kontextsensitiv („von der Umgebung abhängend“) sind. Vgl. hierzu die Bedeutung von <code>[^abc]</code>.
-Um dies etwas klarer zu machen, geben wir folgendes Beispiel aus einem Logfile:
-</div>
-<div>
-<div class="test">
-<pre>
+                Hierbei ist zu beachten, dass diese Zeichen kontextsensitiv („von der Umgebung abhängend“) sind. Vgl. hierzu die Bedeutung von <code>[^abc]</code>. Um dies etwas klarer zu machen, geben wir folgendes Beispiel aus einem Logfile:
+                <!--</div>-->
+                <div>
+                    <div class="test">
+                        <pre>
 error Accessing Customer Data unsuccesfull!
 success Operation Completed.
 </pre>
-</div>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="search row">
-      <div class="col-xs-6">
-        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="content">
-Wenn wir nun die erfolgreichen Durchführungen filtern wollen, so würde die Suche nach dem Wort success sowohl den ersten als auch den zweiten Text treffen. Die Suche nach <code>^success</code> wäre allerdings dann wieder eindeutig.
-</div>
-
-<h3>Übung 5: Der Beginn und der Anfang</h3>
-<div class="content">
-Betrachte folgende BIC – Liste:
-</div>
-<div>
-<div class="test">
-  <pre>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="search row">
+                                <div class="col-xs-6">
+                                    <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+                                    <button type="button" name="mark" class="btn btn-primary">Check</button>
+                                    <button type="button" name="clear" class="btn btn-primary">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="content">-->
+                Wenn wir nun die erfolgreichen Durchführungen filtern wollen, so würde die Suche nach dem Wort success sowohl den ersten als auch den zweiten Text treffen. Die Suche nach <code>^success</code> wäre allerdings dann wieder eindeutig.
+                <!--</div>-->
+            </section>
+            <section>
+                <h3>Übung 5: Der Beginn und der Anfang</h3>
+                <!-- <div class="content">-->
+                Betrachte folgende BIC – Liste:
+                <!--</div>-->
+                <div>
+                    <div class="test">
+                        <pre>
 AUSKDEFFXXX
 BCITUS33XXX
 BGUSBGSFXXX
@@ -463,46 +673,45 @@ HANYUS33XXX
 /81651666 IRVTUS3NXXX
 KEYBUS33FEX 
 </pre>
-</div>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="search row">
-      <div class="col-xs-6">
-        <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
-        <button type="button" name="mark" class="btn btn-primary">Check</button><button type="button" name="clear" class="btn btn-primary">Clear</button>
-      </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="search row">
+                                <div class="col-xs-6">
+                                    <input type="text" name="regex" class="form-control input-sm" placeholder="Ihre Reguläre Ausdrücke">
+                                    <button type="button" name="mark" class="btn btn-primary">Check</button>
+                                    <button type="button" name="clear" class="btn btn-primary">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="content">-->
+                <ol type="a">
+                    <li>Finde alle BICs, die am Anfang einer Zeile stehen und sich auf ein US – Institut beziehen, also an der Stelle 5 und 6 US enthalten.</li>
+                    <li>Finde alle BICs, die am Ende einer Zeile stehen und sich auf ein US – Institut beziehen</li>
+                    <li>Was ist der Unterschied in den Ergebnissen a und b?</li>
+                </ol>
+                <!--</div>-->
+            </section>
+            <section>
+                <h3>Übung 5: Das Konzept der Gruppierung</h3>
+
+                <!-- <div class="content">-->
+                Sogenannte Gruppierungen ermöglichen es insbesondere, Teildaten für eine weitere Verarbeitung auszuschneiden. Diese Gruppen werden durch Klammern gebildet. <br/>
+                Das folgende Beispiel zeigt die Möglichkeiten für eine BIC6. Nehmen wir die BIC6 COBADE. Diese können wir mit dem regulären Ausdruck ^(.{4})(.{2})$ in zwei Gruppen zerlegt werden die erste enthält dann COBA und die zweite Gruppe enthält DE.<br/>
+                <br/>
+                Diese Gruppen können auch verschachtelt auftreten (Klammer in Klammer). Im Beispiel ergibt der beispielhafte Ausdruck <code>^(.{4}(.{2}))$</code> als „äußere Gruppe“ COBADE und als „innere Gruppe“ DE.<br/>
+                Eine Erweiterung ergibt sich, wenn man bedingte Gruppierung zulässt. Bedingungen werden in Klammern durch das „pipe“ Symbol dargestellt. <br/>
+                Im vorhergehenden Beispiel könnte man mit
+                <code>^(.{4}(DE|IT))$</code> zwar im gegebenen Einzelfall das vorhergehende Ergebnis erzeugen würde aber z.B. CITIUS ignorieren.<br/>
+                Es ist weiterhin möglich diese Ausdrücke zu referenzieren. Im Beispiel oben
+                <code>^\1(.{4})\1(.{2})$</code>. Mit diesem Instrument können wir Ersetzen – Operationen durchführen. Dies ist allerdings Sprachabhängig.
+                <!--</div>-->
+
+            </section>
+        </div>
     </div>
-  </div>
-</div>
-</div>
-<div class="content">
-  <ol type="a">
-<li>Finde alle BICs, die am Anfang einer Zeile stehen und sich auf ein US – Institut beziehen, also an der Stelle 5 und 6 US enthalten.</li>
-<li>Finde alle BICs, die am Ende einer Zeile stehen und sich auf ein US – Institut beziehen</li>
-<li>Was ist der Unterschied in den Ergebnissen a und b?</li>
-</ol>
-</div>
-
-<h3>Übung 5: Das Konzept der Gruppierung</h3>
-
-<div class="content">
-Sogenannte Gruppierungen ermöglichen es insbesondere, Teildaten für eine weitere Verarbeitung auszuschneiden. Diese Gruppen werden durch Klammern gebildet. </br>
-Das folgende Beispiel zeigt die Möglichkeiten für eine BIC6. Nehmen wir die BIC6 COBADE. Diese können wir mit dem regulären Ausdruck ^(.{4})(.{2})$ in zwei Gruppen zerlegt werden die erste enthält dann COBA und die zweite Gruppe enthält DE.</br>
-</br>
-Diese Gruppen können auch verschachtelt auftreten (Klammer in Klammer). Im Beispiel ergibt der beispielhafte Ausdruck <code>^(.{4}(.{2}))$</code> als „äußere Gruppe“ COBADE und als „innere Gruppe“ DE.</br>
-Eine Erweiterung ergibt sich, wenn man bedingte Gruppierung zulässt. Bedingungen werden in Klammern durch das „pipe“ Symbol dargestellt. </br>
-Im vorhergehenden Beispiel könnte man mit 
-<code>^(.{4}(DE|IT))$</code>
- zwar im gegebenen Einzelfall das vorhergehende Ergebnis erzeugen würde aber z.B. CITIUS ignorieren.</br>
-Es ist weiterhin möglich diese Ausdrücke zu referenzieren. Im Beispiel oben
-<code>^\1(.{4})\1(.{2})$
-</code>. 
-Mit diesem Instrument können wir Ersetzen – Operationen durchführen. Dies ist allerdings Sprachabhängig.
-</div>
-
-
-</div>
 </body>
 
 </html>
-
